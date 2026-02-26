@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP32 Mini - HOME ALONE Monitoring Project</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Mermaid JS for Flowchart -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    padding: 20px 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.hero {
+    padding: 80px 20px;
+    text-align: center;
+    background: white;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+}
+
+.section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #2c5364;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+ul {
+    padding-left: 20px;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+button {
+    background: #2c5364;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #203a43;
+}
+
+footer {
+    background: #0f2027;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+@media(max-width:768px){
+    header{
+        padding:20px;
+    }
+    .hero h2{
+        font-size:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>ESP32 Mini - HOME ALONE Monitoring</h1>
+<nav>
+<a href="#about">Tentang</a>
+<a href="#komponen">Komponen</a>
+<a href="#desain">Desain</a>
+<a href="#flowchart">Flowchart</a>
+<a href="#tutorial">Tutorial</a>
+</nav>
+</header>
+
+<section class="hero">
+<h2>Project Smart Home Monitoring Berbasis ESP32 Mini</h2>
+<p>Membuat sistem monitoring rumah jarak jauh menggunakan ESP32 Mini, sensor gerak, dan notifikasi real-time melalui internet.</p>
+<button onclick="scrollToSection('tutorial')">Mulai Belajar</button>
+</section>
+
+<section id="about" class="section">
+<h2>Tentang Project</h2>
+<div class="card">
+<p>HOME ALONE Monitoring Project adalah sistem keamanan rumah sederhana berbasis IoT menggunakan ESP32 Mini. Sistem ini dapat mendeteksi pergerakan dan mengirim notifikasi ke smartphone melalui WiFi.</p>
+</div>
+</section>
+
+<section id="komponen" class="section">
+<h2>Komponen yang Dibutuhkan</h2>
+<div class="card">
+<ul>
+<li>ESP32 Mini</li>
+<li>Sensor PIR (Motion Sensor)</li>
+<li>Buzzer</li>
+<li>LED Indicator</li>
+<li>Resistor 220Ω</li>
+<li>Kabel Jumper</li>
+<li>Breadboard</li>
+</ul>
+</div>
+</section>
+
+<section id="desain" class="section">
+<h2>Desain Project</h2>
+<div class="card">
+<p>Berikut contoh wiring diagram sederhana:</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/ESP32-WROOM-32_Pinout.png" alt="ESP32 Pinout">
+<p>Hubungkan:</p>
+<ul>
+<li>PIR OUT → GPIO 14</li>
+<li>LED → GPIO 27</li>
+<li>Buzzer → GPIO 26</li>
+<li>VCC → 5V</li>
+<li>GND → GND</li>
+</ul>
+</div>
+</section>
+
+<section id="flowchart" class="section">
+<h2>Flowchart Sistem</h2>
+<div class="card">
+<div class="mermaid">
+flowchart TD
+A[Start] --> B[Inisialisasi WiFi & Sensor]
+B --> C{Gerakan Terdeteksi?}
+C -- Ya --> D[LED ON & Buzzer ON]
+D --> E[Kirim Notifikasi]
+E --> C
+C -- Tidak --> F[Monitoring...]
+F --> C
+</div>
+</div>
+</section>
+
+<section id="tutorial" class="section">
+<h2>Tutorial Pembuatan</h2>
+
+<div class="card">
+<h3>1️⃣ Persiapan Software</h3>
+<ul>
+<li>Install Arduino IDE</li>
+<li>Tambahkan Board ESP32</li>
+<li>Install Library WiFi</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>2️⃣ Upload Program ke ESP32</h3>
+<pre>
+#include &lt;WiFi.h&gt;
+
+#define PIR 14
+#define LED 27
+#define BUZZER 26
+
+void setup(){
+  pinMode(PIR, INPUT);
+  pinMode(LED, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(115200);
+}
+
+void loop(){
+  int motion = digitalRead(PIR);
+  if(motion == HIGH){
+    digitalWrite(LED, HIGH);
+    digitalWrite(BUZZER, HIGH);
+    delay(3000);
+  }else{
+    digitalWrite(LED, LOW);
+    digitalWrite(BUZZER, LOW);
+  }
+}
+</pre>
+</div>
+
+<div class="card">
+<h3>3️⃣ Testing Sistem</h3>
+<p>Nyalakan sistem dan gerakkan tangan di depan sensor PIR. Jika terdeteksi, LED dan buzzer akan aktif.</p>
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 ESP32 Mini HOME ALONE Monitoring Project | Dibuat untuk Pembelajaran IoT</p>
+</footer>
+
+<script>
+mermaid.initialize({ startOnLoad: true });
+
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+</script>
+
+</body>
+</html>
