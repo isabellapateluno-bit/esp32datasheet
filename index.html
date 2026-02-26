@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ESP32 Mini - HOME ALONE Monitoring System</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 
 <style>
@@ -18,14 +18,13 @@ scroll-behavior:smooth;
 
 body{
 font-family:'Poppins',sans-serif;
-background:#f5f7fa;
-color:#333;
-line-height:1.7;
+background:#0f0f0f;
+color:#e0e0e0;
+line-height:1.8;
 }
 
 header{
-background:linear-gradient(135deg,#141e30,#243b55);
-color:white;
+background:linear-gradient(90deg,#00332e,#005f56,#00bfa6);
 padding:20px 60px;
 position:sticky;
 top:0;
@@ -33,7 +32,8 @@ z-index:1000;
 }
 
 header h1{
-font-size:24px;
+font-family:'Orbitron',sans-serif;
+color:#00ffcc;
 }
 
 nav{
@@ -48,89 +48,93 @@ font-weight:500;
 }
 
 nav a:hover{
-color:#00d4ff;
+color:#00ffcc;
 }
 
 .hero{
-background:white;
-padding:100px 20px;
 text-align:center;
+padding:120px 20px;
+background:radial-gradient(circle at center,#00332e,#000000);
 }
 
 .hero h2{
-font-size:40px;
+font-family:'Orbitron';
+font-size:42px;
+color:#00ffcc;
 margin-bottom:20px;
-color:#243b55;
 }
 
 .hero p{
-max-width:800px;
+max-width:900px;
 margin:auto;
 font-size:18px;
 }
 
-.btn{
-display:inline-block;
-margin-top:30px;
-padding:12px 25px;
-background:#243b55;
-color:white;
-border-radius:6px;
-text-decoration:none;
-}
-
-.btn:hover{
-background:#141e30;
-}
-
 .section{
-max-width:1100px;
+max-width:1200px;
 margin:80px auto;
 padding:0 20px;
 }
 
 .section h2{
-margin-bottom:25px;
-color:#243b55;
+font-family:'Orbitron';
+color:#00ffcc;
+margin-bottom:30px;
+border-bottom:2px solid #00ffcc;
+padding-bottom:10px;
 }
 
 .card{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 8px 25px rgba(0,0,0,0.05);
-margin-bottom:30px;
+background:#1a1a1a;
+padding:30px;
+border-radius:15px;
+margin-bottom:40px;
+box-shadow:0 0 20px rgba(0,255,204,0.1);
+}
+
+.card h3{
+color:#00ffcc;
+margin-bottom:15px;
 }
 
 img{
 width:100%;
-border-radius:10px;
-margin-top:15px;
+border-radius:12px;
+margin-top:20px;
 }
 
 pre{
-background:#1e1e1e;
+background:#000;
 color:#00ffcc;
 padding:20px;
 overflow:auto;
 border-radius:10px;
+font-size:14px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table th, table td{
+border:1px solid #00ffcc;
+padding:10px;
+text-align:left;
 }
 
 footer{
-background:#141e30;
-color:white;
+background:#00332e;
 text-align:center;
-padding:30px;
-margin-top:80px;
+padding:40px;
+margin-top:100px;
+color:white;
 }
 
 @media(max-width:768px){
-.hero h2{
-font-size:28px;
-}
-header{
-padding:20px;
-}
+.hero h2{font-size:28px;}
+header{padding:20px;}
 }
 </style>
 </head>
@@ -138,123 +142,126 @@ padding:20px;
 <body>
 
 <header>
-<h1>ESP32 Mini - HOME ALONE Monitoring System</h1>
+<h1>ESP32 Mini - HOME ALONE Monitoring</h1>
 <nav>
 <a href="#overview">Overview</a>
-<a href="#components">Components</a>
-<a href="#architecture">Architecture</a>
-<a href="#circuit">Circuit</a>
-<a href="#flowchart">Flowchart</a>
-<a href="#tutorial">Tutorial</a>
-<a href="#improvement">Improvements</a>
+<a href="#hardware">Hardware</a>
+<a href="#design">System Design</a>
+<a href="#implementation">Implementation</a>
+<a href="#testing">Testing</a>
+<a href="#journal">Journal Guide</a>
 </nav>
 </header>
 
 <section class="hero">
-<h2>Smart IoT Home Security Using ESP32 Mini</h2>
-<p>A complete step-by-step guide to building a smart home monitoring system using ESP32 Mini, PIR Motion Sensor, Buzzer, and WiFi connectivity.</p>
-<a href="#tutorial" class="btn">Start Building</a>
+<h2>Smart IoT Security System Using ESP32</h2>
+<p>
+A complete engineering-level guide to designing, implementing, analyzing,
+and publishing an IoT-based home intrusion monitoring system using ESP32.
+</p>
 </section>
 
 <section id="overview" class="section">
-<h2>Project Overview</h2>
+<h2>1. Project Overview</h2>
 <div class="card">
 <p>
-The HOME ALONE Monitoring System is an IoT-based security solution designed to monitor house activity remotely. 
-Using an ESP32 Mini microcontroller with built-in WiFi, the system detects motion and triggers an alarm while sending alerts via internet.
+This project uses the ESP32 microcontroller as the core embedded system to detect motion using a PIR sensor and trigger an alarm system.
+The system can be expanded to cloud-based IoT monitoring.
 </p>
 
-<h3>Main Features:</h3>
-<ul>
-<li>Motion detection using PIR sensor</li>
-<li>Real-time WiFi connectivity</li>
-<li>LED & buzzer alarm system</li>
-<li>Expandable for cloud notification</li>
-</ul>
-</div>
-</section>
-
-<section id="components" class="section">
-<h2>Required Components</h2>
-
-<div class="card">
-<h3>1. ESP32 Mini</h3>
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/ESP32-WROOM-32.jpg">
-<p>Main microcontroller with built-in WiFi and Bluetooth capability.</p>
 </div>
-
-<div class="card">
-<h3>2. PIR Motion Sensor</h3>
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/PIR_motion_sensor.jpg">
-<p>Detects infrared radiation changes caused by human movement.</p>
-</div>
-
-<div class="card">
-<h3>3. Buzzer</h3>
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Buzzer.jpg">
-<p>Produces audible alarm when motion is detected.</p>
-</div>
-
-<div class="card">
-<h3>4. LED Indicator</h3>
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Red_LED.jpg">
-<p>Visual indication of intrusion detection.</p>
-</div>
-
 </section>
 
-<section id="architecture" class="section">
-<h2>System Architecture</h2>
+<section id="hardware" class="section">
+<h2>2. Hardware Components & Theory</h2>
+
 <div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/IoT_architecture.png">
+<h3>2.1 ESP32 Microcontroller</h3>
 <p>
-The ESP32 connects to WiFi network and monitors PIR sensor input. When motion is detected, 
-the system activates alarm outputs and optionally sends notification to cloud service.
+Dual-core 240MHz processor with built-in WiFi and Bluetooth.
+Operates at 3.3V logic level.
 </p>
-</div>
-</section>
-
-<section id="circuit" class="section">
-<h2>Circuit Diagram</h2>
-<div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/ESP32-WROOM-32_Pinout.png">
-<ul>
-<li>PIR OUT → GPIO 14</li>
-<li>LED → GPIO 27 (with 220Ω resistor)</li>
-<li>Buzzer → GPIO 26</li>
-<li>VCC → 5V</li>
-<li>GND → GND</li>
-</ul>
 </div>
+
+<div class="card">
+<h3>2.2 PIR Motion Sensor</h3>
+<p>
+Detects infrared radiation from human body (~37°C).
+Outputs HIGH when motion is detected.
+</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/PIR_motion_sensor.jpg">
+</div>
+
+<div class="card">
+<h3>2.3 LED and Resistor Design</h3>
+<p>
+Using Ohm's Law:
+R = (Vs - Vf) / I  
+For ESP32:
+Vs = 3.3V  
+Vf ≈ 2V  
+I ≈ 6mA  
+R ≈ 220Ω
+</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Red_LED.jpg">
+</div>
+
+<div class="card">
+<h3>2.4 Buzzer Alarm</h3>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Buzzer.jpg">
+</div>
+
 </section>
 
-<section id="flowchart" class="section">
-<h2>System Flowchart</h2>
+<section id="design" class="section">
+<h2>3. System Architecture & Flow</h2>
+
 <div class="card">
+<h3>3.1 System Architecture</h3>
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/IoT_architecture.png">
+</div>
+
+<div class="card">
+<h3>3.2 System Flowchart</h3>
 <div class="mermaid">
 flowchart TD
-A(Start) --> B[Initialize WiFi]
-B --> C[Initialize PIR Sensor]
+A(Start) --> B[Initialize GPIO]
+B --> C[Read PIR Sensor]
 C --> D{Motion Detected?}
-D -- Yes --> E[Turn ON LED & Buzzer]
-E --> F[Send Notification]
-F --> D
-D -- No --> G[Keep Monitoring]
-G --> D
+D -- Yes --> E[Activate Alarm]
+E --> F[Send Cloud Alert]
+F --> C
+D -- No --> G[Idle Monitoring]
+G --> C
 </div>
 </div>
+
 </section>
 
-<section id="tutorial" class="section">
-<h2>Step-by-Step Tutorial</h2>
+<section id="implementation" class="section">
+<h2>4. Step-by-Step Implementation</h2>
 
 <div class="card">
-<h3>Step 1: Install Arduino IDE</h3>
-<p>Download Arduino IDE and install ESP32 Board Package.</p>
+<h3>Step 1: Install Development Environment</h3>
+<p>
+Install Arduino IDE → Add ESP32 Board Manager URL → Select ESP32 Dev Module.
+</p>
 </div>
 
 <div class="card">
-<h3>Step 2: Upload Code</h3>
+<h3>Step 2: Circuit Wiring</h3>
+<table>
+<tr><th>Component</th><th>ESP32 Pin</th></tr>
+<tr><td>PIR OUT</td><td>GPIO 14</td></tr>
+<tr><td>LED</td><td>GPIO 27</td></tr>
+<tr><td>Buzzer</td><td>GPIO 26</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Step 3: Upload Program</h3>
 <pre>
 #include <WiFi.h>
 
@@ -262,54 +269,96 @@ G --> D
 #define LED 27
 #define BUZZER 26
 
-void setup() {
-  Serial.begin(115200);
-  pinMode(PIR, INPUT);
-  pinMode(LED, OUTPUT);
-  pinMode(BUZZER, OUTPUT);
+void setup(){
+ Serial.begin(115200);
+ pinMode(PIR, INPUT);
+ pinMode(LED, OUTPUT);
+ pinMode(BUZZER, OUTPUT);
 }
 
-void loop() {
-  int motion = digitalRead(PIR);
+void loop(){
+ int motion = digitalRead(PIR);
 
-  if (motion == HIGH) {
-    Serial.println("Motion Detected!");
-    digitalWrite(LED, HIGH);
-    digitalWrite(BUZZER, HIGH);
-    delay(3000);
-  } else {
-    digitalWrite(LED, LOW);
-    digitalWrite(BUZZER, LOW);
-  }
+ if(motion == HIGH){
+   digitalWrite(LED, HIGH);
+   digitalWrite(BUZZER, HIGH);
+   delay(3000);
+ } else {
+   digitalWrite(LED, LOW);
+   digitalWrite(BUZZER, LOW);
+ }
 }
 </pre>
 </div>
 
+</section>
+
+<section id="testing" class="section">
+<h2>5. Testing & Performance Evaluation</h2>
+
 <div class="card">
-<h3>Step 3: Testing</h3>
+<h3>5.1 Functional Testing</h3>
+<table>
+<tr><th>Test Case</th><th>Expected Output</th></tr>
+<tr><td>No Motion</td><td>LED OFF</td></tr>
+<tr><td>Motion</td><td>LED ON + Buzzer ON</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>5.2 Power Analysis</h3>
 <p>
-Power the ESP32 and move in front of the PIR sensor. 
-The LED and buzzer should activate when motion is detected.
+ESP32 ≈ 180mA  
+PIR ≈ 0.05mA  
+LED + Buzzer ≈ 30mA  
+Total ≈ 210mA
 </p>
 </div>
 
 </section>
 
-<section id="improvement" class="section">
-<h2>Future Improvements</h2>
+<section id="journal" class="section">
+<h2>6. Guide to Publishing Microcontroller Journal</h2>
+
 <div class="card">
+<h3>6.1 Paper Structure (IEEE Format)</h3>
+<ol>
+<li>Abstract</li>
+<li>Introduction</li>
+<li>Literature Review</li>
+<li>System Design</li>
+<li>Methodology</li>
+<li>Results</li>
+<li>Conclusion</li>
+<li>References</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>6.2 Suggested Journals</h3>
 <ul>
-<li>Telegram Notification Integration</li>
-<li>Blynk Mobile Dashboard</li>
-<li>Cloud Database Logging</li>
-<li>Camera Module Integration</li>
-<li>Mobile App Control</li>
+<li>IEEE Access</li>
+<li>MDPI Sensors</li>
+<li>Elsevier Microelectronics Journal</li>
+<li>Springer Embedded Systems Journal</li>
 </ul>
 </div>
+
+<div class="card">
+<h3>6.3 Experimental Data Required</h3>
+<ul>
+<li>Detection Accuracy</li>
+<li>False Alarm Rate</li>
+<li>Power Efficiency</li>
+<li>Network Latency</li>
+</ul>
+</div>
+
 </section>
 
 <footer>
-<p>© 2026 ESP32 Mini HOME ALONE Monitoring Project | IoT Learning Platform</p>
+© 2026 ESP32 Mini HOME ALONE Monitoring Project  
+Designed for Embedded Systems & IoT Research
 </footer>
 
 <script>
